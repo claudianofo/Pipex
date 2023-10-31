@@ -13,6 +13,7 @@
 #include "pipex.h"
 #include "libft/libft.h"
 
+//checks for ' or " and treats contents as a single string
 static char	**make_array(char const *s)
 {
 	int		i;
@@ -49,21 +50,12 @@ static char	**free_stuff(char **array, unsigned int i)
 	free(array);
 	return (NULL);
 }
-// if (s[j] == '\'' || s[j] == '\"')
-		// {
-		// 	array[i] = ft_strdupc(&s[j + 1], s[j]);
-		// 	if (!array[i])
-		// 		return (free_stuff(array, i));
-		// 	j += ft_strlen(array[i++]) + 2;
-		// }
-		// else
-		// {
-		// 	array[i] = ft_strdupc(&s[j], ' ');
-		// 	if (!array[i])
-		// 		return (free_stuff(array, i));
-		// 	j += ft_strlen(array[i++]) + 1;
-		// }
 
+//if inside quotes, everthing inside quotes is duplucated
+//using ft_strdupc: an edited version of ft_strdup
+//instead of ft_strdup(str, int n) where n is number of characters duplicated
+//ft_strdupc(str, char c) duplicates up to the first instance of c
+//offset is used to correctly increment j in the fill_array function
 static char	*get_string(char *s, unsigned int *offset)
 {
 	char	*str;
